@@ -130,6 +130,7 @@
 					var plz = "";
 					var strasse = "";
 					var land = "";
+					var place = "";
 					var costommarker = "";
 					
 					$(this).find('tag').each(function(){
@@ -156,6 +157,10 @@
 						{
 							plz = EleValue;
 						}
+						if ((EleKey=="addr:place"))
+						{
+							place = EleValue;
+						}
 						
 					});
 
@@ -166,7 +171,13 @@
 						if (stadt=="") stadt = "<i><b>fehlt</i></b>";
 						if (strasse==""){
 							strasse = "<i><b>fehlt</i></b>";
-							costommarker = "red"; 
+							if (place==""){ //testen ob es Addr place gibt, weil dann muss der Marker nicht rot sein
+								costommarker = "red"; 
+							}
+							else {
+								strasse += "<br>Place: " + place;
+							}
+							
 						} 
 						if (plz=="") plz = "<i><b>fehlt</i></b>";
 						if (land=="") land = "<i><b>fehlt</i></b>";
