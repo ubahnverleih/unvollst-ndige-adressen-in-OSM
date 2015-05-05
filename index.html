@@ -131,54 +131,53 @@
 					var strasse = "";
 					var land = "";
 					var place = "";
+					var hamlet = "";
 					var costommarker = "";
 					
 					$(this).find('tag').each(function(){
 						EleKey = $(this).attr("k");
 						EleValue = $(this).attr("v");
 						//EleText = EleText + "<b>" + EleKey + ": </b>" + EleValue + "<br/>";
-						if ((EleKey=="addr:housenumber"))
-						{
+						switch (EleKey) {
+						case "addr:housenumber":
 							hausnummer = EleValue;
-						}
-						if ((EleKey=="addr:street"))
-						{
+							break;
+						case "addr:street":
 							strasse = EleValue;
-						}
-						if ((EleKey=="addr:country"))
-						{
+							break;
+						case "addr:country":
 							land = EleValue;
-						}
-						if ((EleKey=="addr:city"))
-						{
+							break;
+						case "addr:city":
 							stadt = EleValue;
-						}
-						if ((EleKey=="addr:postcode"))
-						{
+							break;
+						case "addr:postcode":
 							plz = EleValue;
-						}
-						if ((EleKey=="addr:place"))
-						{
+							break;
+						case "addr:place":
 							place = EleValue;
+							break;
+						case "addr:hamlet":
+							hamlet = EleValue;
+							break;
 						}
-						
 					});
-
-
-					
 
 					if (hausnummer!=""){
 						if (stadt=="") stadt = "<i><b>fehlt</i></b>";
 						if (strasse==""){
 							strasse = "<i><b>fehlt</i></b>";
-							if (place==""){ //testen ob es Addr place gibt, weil dann muss der Marker nicht rot sein
+							if (!place && !hamlet) {
+								// nur rot wenn weder 'place' noch 'hamlet' vorhanden
 								costommarker = "red"; 
+							} else {
+								if (place) {
+									strasse += "<br>Place: " + place;
+								} else {
+									strasse += "<br>Hamlet: " + hamlet;
+								}
 							}
-							else {
-								strasse += "<br>Place: " + place;
-							}
-							
-						} 
+						}
 						if (plz=="") plz = "<i><b>fehlt</i></b>";
 						if (land=="") land = "<i><b>fehlt</i></b>";
 						EleText = "Hausnummer: " + hausnummer + "<br>Straße: " + strasse + "<br> Postleitzahl: " + plz + "<br> Stadt: " + stadt + "<br>Land: " + land + "<br><br><a href='#' onclick='openinJOSM(\""+EleType+"\",\""+EleID+"\")'>edit in JOSM</a> | <a href='https://openstreetmap.org/"+EleType+ "/"+EleID+"' target='blank'>view on osm.org</a>";
