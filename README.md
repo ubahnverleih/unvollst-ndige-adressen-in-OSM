@@ -1,6 +1,6 @@
 # Unvollständige Adressen in OSM
 
-[Testinstallation hier](http://osm.lyrk.de/address)
+[Testinstallation hier](http://ubahnverleih.github.io/unvollst-ndige-adressen-in-OSM/)
 
 Diese Karte zeigt unvollständige Adressen in [Openstreetmap](http://osm.org). Objekte werden angezeigt, wenn Eine Hausnummer vorhanden ist, aber keine Straße, Postleitzahl oder Stadt. Adressen bei denen die Straße fehlt, werden mit einem roten Pin gekennzeichnet. Zur besseren Übersicht kann die Option aktiviert werden, dass nur Objekte mit fehlenden addr:street Tags angezeigt werden.
 
